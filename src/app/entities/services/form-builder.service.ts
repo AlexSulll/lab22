@@ -5,7 +5,6 @@ import { FormBuilder, Validators } from "@angular/forms";
   providedIn: 'root'
 })
 export class FormBuilderService {
-
   constructor(
     private readonly _formBuilder: FormBuilder,
   ) { }
@@ -16,8 +15,8 @@ export class FormBuilderService {
       'NumberOfComputer': [null, [Validators.required]],
       'date': [null, [Validators.required]],
       'game': [null, [Validators.required]],
-      'check': [false, [Validators.required]],
-      'phone': [null, [Validators.pattern(/^[0-9 +()-]*$/),Validators.required]],
+      'check': [null, [Validators.required]],
+      'phone': [null, [Validators.required]],
     });
   }
 }

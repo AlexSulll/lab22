@@ -54,8 +54,8 @@ const COLUMNS_SCHEMA = [
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  displayedColumns: string[] = COLUMNS_SCHEMA.map((col) => col.key);
-  dataSource: any = USER_DATA;
+  public displayedColumns: string[] = COLUMNS_SCHEMA.map((col) => col.key);
+  public dataSource: any = USER_DATA;
   removeRow(id: number) {
     this.dataSource = this.dataSource.filter((u:any) => u.id !== id);
   }

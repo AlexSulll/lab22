@@ -10,6 +10,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { ErrorStateMatcher, MatNativeDateModule } from "@angular/material/core";
 import { FormBuilderService } from "../../services/form-builder.service";
 import { MatDialogModule } from "@angular/material/dialog";
+import { NgxMaskDirective, provideNgxMask } from "ngx-mask";
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -20,19 +21,17 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: 'app-dialog-window',
   standalone: true,
-  imports: [CommonModule, MatInputModule, MatCardModule, MatCheckboxModule, MatDatepickerModule, MatSelectModule, MatButtonModule, MatNativeDateModule, ReactiveFormsModule, MatDialogModule],
+  imports: [CommonModule, MatInputModule, MatCardModule, MatCheckboxModule, MatDatepickerModule, MatSelectModule, MatButtonModule, MatNativeDateModule, ReactiveFormsModule, MatDialogModule, NgxMaskDirective],
+  providers: [provideNgxMask()],
   templateUrl: './dialog-window.component.html',
   styleUrls: ['./dialog-window.component.css']
 })
 export class DialogWindowComponent {
   matcher = new MyErrorStateMatcher();
   public pcClubForm = this._formBuilderService.pcClubForm;
-  constructor(
+    constructor(
     private readonly _formBuilderService: FormBuilderService
   ) { }
-  getDateFormatString(): string {
-    return 'DD.MM.YYYY';
-  }
 
   public add() {
     console.log(this.pcClubForm.getRawValue());
@@ -59,5 +58,9 @@ export class DialogWindowComponent {
 
   public get phoneControl(): FormControl {
     return this.pcClubForm.get('phone') as FormControl;
+  }
+
+  getToday() {
+    return new Date().toISOString().split('T')[0];
   }
 }
