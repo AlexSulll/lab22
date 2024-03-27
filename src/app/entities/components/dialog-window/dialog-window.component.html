@@ -77,8 +77,8 @@
       <mat-label>
         Номер телефона
       </mat-label>
-      <span matTextPrefix>+7</span>
-      <input matInput [formControl]="phoneControl" mask="(000)000-00-00" placeholder="(999)999-99-99" value="" type="tel">
+      <span matTextPrefix>+7 &nbsp;</span>
+      <input matInput [formControl]="phoneControl" mask="(000)000-00-00" placeholder="(000)000-00-00" value="" type="tel">
       <mat-error *ngIf="phoneControl.hasError('required')">
         Введите номер телефона по маске +7(999)999-99-99
       </mat-error>
@@ -87,5 +87,7 @@
 </mat-dialog-content>
 <mat-dialog-actions class="button">
   <button mat-button mat-dialog-close mat-raised-button class="button-exit">Отменить</button>
-  <button mat-button mat-raised-button color="accent" mat-dialog-close (click)="add()" class="button-add" [disabled]="pcClubForm.invalid">Сохранить</button>
+  <button mat-button mat-raised-button color="accent" [mat-dialog-close]="" (click)="add()" class="button-add">
+<!--          [disabled]="pcClubForm.invalid"-->
+  Сохранить</button>
 </mat-dialog-actions>

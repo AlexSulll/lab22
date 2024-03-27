@@ -9,9 +9,9 @@ import { MatNativeDateModule } from "@angular/material/core";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 
 const USER_DATA = [
-  {id: '1', name: 'Сулимов Александр Дмитриевич', NumberOfComputer: '1', date: '14.03.2024', Game: 'CS2', Phone: '+7 (912) 845-76-55'},
-  {id: '2', name: 'Сабиров Данияр Серикович', NumberOfComputer: '3', date: '16.03.2024', Game: 'DOTA 2', Phone: '+7 (906) 573-18-00'},
-  {id: '3', name: 'Сизов Игорь Михайлович', NumberOfComputer: '2', date: '20.02.2024', Game: 'PUBG', Phone: '+7 (977) 777-77-777'},
+  {id: '1', name: 'Сулимов Александр Дмитриевич', numberOfComputer: '1', date: '14.03.2024', game: 'CS2', phone: '+7(912)845-76-55'},
+  {id: '2', name: 'Сабиров Данияр Серикович', numberOfComputer: '3', date: '16.03.2024', game: 'DOTA 2', phone: '+7(906)573-18-00'},
+  {id: '3', name: 'Сизов Игорь Михайлович', numberOfComputer: '2', date: '20.02.2024', game: 'PUBG', phone: '+7(977)777-77-777'},
 ];
 
 const COLUMNS_SCHEMA = [
@@ -21,7 +21,7 @@ const COLUMNS_SCHEMA = [
     label: "ФИО"
   },
   {
-    key: "NumberOfComputer",
+    key: "numberOfComputer",
     type: "number",
     label: "Номер комьютера"
   },
@@ -31,12 +31,12 @@ const COLUMNS_SCHEMA = [
     label: "Дата бронирования"
   },
   {
-    key: "Game",
+    key: "game",
     type: "text",
     label: "Игра"
   },
   {
-    key: "Phone",
+    key: "phone",
     type: "text",
     label: "Номер телефона"
   },
@@ -61,7 +61,12 @@ export class AppComponent {
   }
   constructor(public dialog: MatDialog) {
   }
-  openDialog(){
-    this.dialog.open(DialogWindowComponent, {width: '550px'});
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogWindowComponent, {width: '550px'});
+    dialogRef.afterClosed().subscribe(result => {
+      //console.log('The dialog was closed');
+      //console.log(result);
+      this.dataSource = [...this.dataSource,result];
+    });
   }
 }
