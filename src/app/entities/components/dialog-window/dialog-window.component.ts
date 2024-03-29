@@ -7,11 +7,11 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatSelectModule } from "@angular/material/select";
 import { MatButtonModule } from "@angular/material/button";
-import { ErrorStateMatcher, MatNativeDateModule } from "@angular/material/core";
+import { ErrorStateMatcher, MAT_DATE_FORMATS, MatNativeDateModule } from "@angular/material/core";
 import { FormBuilderService } from "../../services/form-builder.service";
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from "@angular/material/dialog";
 import { NgxMaskDirective, provideNgxMask, NgxMaskPipe } from "ngx-mask";
-import { DialogData } from "../../interfaces/dialog-data.interface";
+import { IDialogData } from "../../interfaces/dialog-data.interface";
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -33,43 +33,40 @@ export class DialogWindowComponent {
     constructor(
     private readonly _formBuilderService: FormBuilderService,
     public dialogRef: MatDialogRef<DialogWindowComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Inject(MAT_DIALOG_DATA) public data: IDialogData,
   ) { }
 
   public add() {
-      //const string = this.pcClubForm.get('phone')?.value;
-      // @ts-ignore
-      //const phone = '+7(' + string.substring(0,3) + ')' + string.substring(3,6) + '-' + string.substring(6,8) + '-' + string.substring(8);
-      const formValue = {name: this.pcClubForm.get('name')?.value, numberOfComputer: this.pcClubForm.get('numberOfComputer')?.value, date: this.pcClubForm.get('date')?.value, game: this.pcClubForm.get('game')?.value, phone: this.phoneControl};
-      //const formValue = this.pcClubForm.getRawValue();
-      //console.log(formValue);
-      console.log(this.pcClubForm.getRawValue());
+      const formValue: IDialogData = this.pcClubForm.getRawValue();
       this.dialogRef.close(formValue);
   }
+  public close(): void {
+      this.dialogRef.close();
+  }
   public get nameControl(): FormControl {
-      return this.pcClubForm.get('name') as FormControl;
+      return this.pcClubForm.get('name') as FormControl<string | null>;
   }
 
   public get numberOfComputerControl(): FormControl {
-      return this.pcClubForm.get('numberOfComputer') as FormControl;
+      return this.pcClubForm.get('numberOfComputer') as FormControl<string | null>;
   }
 
   public get dateControl(): FormControl {
-      return this.pcClubForm.get('date') as FormControl;
+      return this.pcClubForm.get('date') as FormControl<string | null>;
   }
   public get gameControl(): FormControl {
-      return this.pcClubForm.get('game') as FormControl;
+      return this.pcClubForm.get('game') as FormControl<string | null>;
   }
 
   public get checkControl(): FormControl {
-      return this.pcClubForm.get('check') as FormControl;
+      return this.pcClubForm.get('check') as FormControl<string | null>;
   }
 
   public get phoneControl(): FormControl {
-      return this.pcClubForm.get('phone') as FormControl;
+      return this.pcClubForm.get('phone') as FormControl<string | null>;
   }
 
-  getToday() {
+  public getToday() {
       return new Date().toISOString().split('T')[0];
   }
 }

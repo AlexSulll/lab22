@@ -11,12 +11,12 @@ export class FormBuilderService {
 
   public get pcClubForm () {
     return this._formBuilder.group({
-      'name': ['',[Validators.pattern(/^[а-яА-ЯёЁa-zA-Z ]*$/), Validators.required]],
-      'numberOfComputer': ['', [Validators.required]],
-      'date': ['', [Validators.required]],
-      'game': ['', [Validators.required]],
-      'check': ['', [Validators.required]],
-      'phone': ['', [Validators.required]],
+      'name': [null,[Validators.pattern(/^[а-яА-ЯёЁa-zA-Z ]*$/), Validators.required]],
+      'numberOfComputer': [null, [Validators.required]],
+      'date': [null, [Validators.required]],
+      'game': [null, [Validators.required]],
+      'check': [null, [Validators.required]],
+      'phone': [null, [Validators.required]],
     });
   }
 }

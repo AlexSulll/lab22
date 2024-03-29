@@ -7,11 +7,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DialogWindowComponent } from "./entities/components/dialog-window/dialog-window.component";
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatDatepickerModule } from "@angular/material/datepicker";
+import { IDialogData } from "./entities/interfaces/dialog-data.interface";
 
-const USER_DATA = [
-  {id: '1', name: 'Сулимов Александр Дмитриевич', numberOfComputer: '1', date: '14.03.2024', game: 'CS2', phone: '+7(912)845-76-55'},
-  {id: '2', name: 'Сабиров Данияр Серикович', numberOfComputer: '3', date: '16.03.2024', game: 'DOTA 2', phone: '+7(906)573-18-00'},
-  {id: '3', name: 'Сизов Игорь Михайлович', numberOfComputer: '2', date: '20.02.2024', game: 'PUBG', phone: '+7(977)777-77-777'},
+
+const USER_DATA: IDialogData[] = [
+  {id: 1, name: 'Сулимов Александр Дмитриевич', numberOfComputer: '1', date: '14.03.2024', game: 'CS2', phone: '+7(912)845-76-55'},
+  {id: 2, name: 'Сабиров Данияр Серикович', numberOfComputer: '3', date: '16.03.2024', game: 'DOTA 2', phone: '+7(906)573-18-00'},
+  {id: 3, name: 'Сизов Игорь Михайлович', numberOfComputer: '2', date: '20.02.2024', game: 'PUBG', phone: '+7(977)777-77-777'},
 ];
 
 const COLUMNS_SCHEMA = [
@@ -64,9 +66,10 @@ export class AppComponent {
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogWindowComponent, {width: '550px'});
     dialogRef.afterClosed().subscribe(result => {
-      //console.log('The dialog was closed');
-      //console.log(result);
-      this.dataSource = [...this.dataSource,result];
+      if (result) {
+        const value = {id: this.dataSource[this.dataSource.length - 1].id + 1, ...result}
+        this.dataSource = [...this.dataSource,value];
+      }
     });
   }
 }
