@@ -1,4 +1,4 @@
-import {Pipe, PipeTransform} from "@angular/core";
+import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe ({
   name: 'phoneTransform',
@@ -7,7 +7,11 @@ import {Pipe, PipeTransform} from "@angular/core";
 })
 
 export class PhoneFormatPipe implements PipeTransform {
-  transform(number: string): string {
-    return "+7(" + number.slice(0, 3) + ")" + number.slice(3, 6) + "-" + number.slice(6, 8) + "-" + number.slice(8);
-  }
+    /**
+     * Из полученных данных мы строим новую строчку
+     * @param phoneNumber - исходная строка
+     */
+    transform(phoneNumber: string): string {
+      return "+7(" + phoneNumber.slice(0, 3) + ")" + phoneNumber.slice(3, 6) + "-" + phoneNumber.slice(6, 8) + "-" + phoneNumber.slice(8);
+    }
 }

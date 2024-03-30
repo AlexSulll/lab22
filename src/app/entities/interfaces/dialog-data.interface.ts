@@ -1,3 +1,6 @@
+/**
+ * Интерфейс для данных, получаемых из input
+ */
 export interface IDialogData
 {
   id?: number;
@@ -6,4 +9,14 @@ export interface IDialogData
   date: string | null;
   game: string | null;
   phone: string | null;
+}
+
+/**
+ * Интерфейс для задания колонок в таблице
+ */
+export interface IColumn
+{
+  key: string,
+  type: string,
+  label: string,
 }

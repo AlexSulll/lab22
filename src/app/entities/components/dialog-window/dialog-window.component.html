@@ -10,8 +10,12 @@
           <mat-label>
             ФИО
           </mat-label>
-          <input matInput [formControl]=nameControl [errorStateMatcher]="matcher">
-          <mat-hint>Корректные данные</mat-hint>
+          <input [formControl]=nameControl
+                 [errorStateMatcher]="matcher"
+                 matInput>
+          <mat-hint>
+            Корректные данные
+          </mat-hint>
           <mat-error *ngIf="nameControl.hasError('pattern') && !nameControl.hasError('required')">
             Вводить можно только <strong>буквы!</strong>
           </mat-error>
@@ -47,10 +51,16 @@
     <h3>Выберите дату брони</h3>
     <div>
       <mat-form-field class="example-form-field">
-        <input matInput [formControl]="dateControl" [matDatepicker]="picker" [max]="getToday()">
-        <mat-hint>дд.мм.гггг</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <input [formControl]="dateControl"
+               [matDatepicker]="picker"
+               [max]="getToday()"
+               matInput>
+        <mat-hint>
+          дд.мм.гггг
+        </mat-hint>
+        <mat-datepicker-toggle [for]="picker"
+                               matIconSuffix/>
+        <mat-datepicker #picker/>
       </mat-form-field>
     </div>
   </div>
@@ -60,7 +70,9 @@
       <mat-label>
         Игра
       </mat-label>
-      <input matInput type="text" [formControl]="gameControl">
+      <input [formControl]="gameControl"
+             type="text"
+             matInput>
       <mat-error *ngIf="gameControl.hasError('required')">
         Введите название игры
       </mat-error>
@@ -68,7 +80,10 @@
   </div>
   <div>
     <section class="example-section">
-      <mat-checkbox class="example-margin" [formControl]="checkControl">Согласны на обработку Ваших персональных данных?</mat-checkbox>
+      <mat-checkbox [formControl]="checkControl"
+                    class="example-margin">
+        Согласны на обработку Ваших персональных данных?
+      </mat-checkbox>
     </section>
   </div>
   <div>
@@ -78,7 +93,11 @@
         Номер телефона
       </mat-label>
       <span matTextPrefix>+7 &nbsp;</span>
-      <input matInput [formControl]="phoneControl" [mask]="'(000)000-00-00'" placeholder="(000)000-00-00" type="tel">
+      <input [formControl]="phoneControl"
+             [mask]="'(000)000-00-00'"
+             placeholder="(000)000-00-00"
+             type="tel"
+             matInput>
       <mat-error *ngIf="phoneControl.hasError('required')">
         Введите номер телефона по маске +7(999)999-99-99
       </mat-error>
@@ -86,6 +105,18 @@
   </div>
 </mat-dialog-content>
 <mat-dialog-actions class="button">
-  <button mat-button mat-dialog-close class="button-exit" (click)="close()">Отменить</button>
-  <button mat-button mat-raised-button color="accent" (click)="add()" class="button-add" [disabled]="pcClubForm.invalid">Сохранить</button>
+  <button (click)="close()"
+          class="button-exit"
+          mat-button
+          mat-dialog-close>
+    Отменить
+  </button>
+  <button [disabled]="pcClubForm.invalid"
+          (click)="add()"
+          class="button-add"
+          color="accent"
+          mat-button
+          mat-raised-button>
+    Сохранить
+  </button>
 </mat-dialog-actions>

@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroupDirective, NgForm, ReactiveFormsModule } from "@angular/forms";
+import { FormControl, FormGroup, FormGroupDirective, NgForm, ReactiveFormsModule } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { MatCardModule } from "@angular/material/card";
 import { MatCheckboxModule } from "@angular/material/checkbox";
@@ -31,14 +31,35 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./dialog-window.component.css']
 })
 export class DialogWindowComponent {
-  matcher = new MyErrorStateMatcher();
-  public pcClubForm = this._formBuilderService.pcClubForm;
+  matcher: MyErrorStateMatcher = new MyErrorStateMatcher();
+  public pcClubForm: FormGroup = this._formBuilderService.pcClubForm;
     constructor(
-    private readonly _formBuilderService: FormBuilderService,
-    public dialogRef: MatDialogRef<DialogWindowComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: IDialogData,
+      private readonly _formBuilderService: FormBuilderService,
+      public dialogRef: MatDialogRef<DialogWindowComponent>,
+      @Inject(MAT_DIALOG_DATA) public data: IDialogData,
   ) { }
-
+  /**
+   * Функция для добавления новых данных в таблицу. Объект строится по интерфейсу и передается
+   * после закрытия диалогового окна.
+   */
+  public add(): void {
+    const formValue: IDialogData = this.pcClubForm.getRawValue();
+    this.dialogRef.close(formValue);
+  }
+  /**
+   * Функция для закрытия окна при нажатии кнопки "Отмена"
+   * никаких данных мы не передаем
+   */
+  public close(): void {
+    this.dialogRef.close();
+  }
+  /**
+   * Функция, которая возвращает дату в данных момент времени.
+   * Создана для ограничения ввода будущей даты
+   */
+  public getToday() {
+    return new Date().toISOString().split('T')[0];
+  }
   public get nameControl(): FormControl {
       return this.pcClubForm.get('name') as FormControl<string | null>;
   }
@@ -56,15 +77,5 @@ export class DialogWindowComponent {
   }
   public get phoneControl(): FormControl {
       return this.pcClubForm.get('phone') as FormControl<string | null>;
-  }
-  public add(): void {
-    const formValue: IDialogData = this.pcClubForm.getRawValue();
-    this.dialogRef.close(formValue);
-  }
-  public close(): void {
-    this.dialogRef.close();
-  }
-  public getToday() {
-      return new Date().toISOString().split('T')[0];
   }
 }

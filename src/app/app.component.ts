@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { MatDialog } from "@angular/material/dialog";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { MatButtonModule } from "@angular/material/button";
 import { MatTableModule } from "@angular/material/table";
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogWindowComponent } from "./entities/components/dialog-window/dialog-window.component";
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatDatepickerModule } from "@angular/material/datepicker";
-import { IDialogData } from "./entities/interfaces/dialog-data.interface";
+import { IColumn, IDialogData } from "./entities/interfaces/dialog-data.interface";
 import { DateFormatPipe } from "./entities/pipes/date-format.pipe";
 import { PhoneFormatPipe } from "./entities/pipes/phone-format.pipe";
 
@@ -60,19 +60,24 @@ const COLUMNS_SCHEMA = [
 })
 
 export class AppComponent {
-  public displayedColumns: string[] = COLUMNS_SCHEMA.map((col) => col.key);
+  public displayedColumns: string[] = COLUMNS_SCHEMA.map((colum: IColumn) => colum.key);
   public dataSource: any = USER_DATA;
-  removeRow(id: number) {
-    this.dataSource = this.dataSource.filter((u:any) => u.id !== id);
+  /**
+   * Функция удаления строки таблицы по id
+   * @param id - id элемента
+   */
+  public removeRow(id: number) {
+    this.dataSource = this.dataSource.filter((element:any) => element.id !== id);
   }
-  constructor(public dialog: MatDialog) {
-  }
+  constructor(
+    public dialog: MatDialog
+  ) {}
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogWindowComponent, {width: '550px'});
-    dialogRef.afterClosed().subscribe(result => {
+    const DIALOGREF: MatDialogRef<DialogWindowComponent> = this.dialog.open(DialogWindowComponent, {width: '550px'});
+    DIALOGREF.afterClosed().subscribe(result => {
       if (result) {
-        const value = {id: this.dataSource[this.dataSource.length - 1].id + 1, ...result}
-        this.dataSource = [...this.dataSource,value];
+        const VALUE = {id: this.dataSource[this.dataSource.length - 1].id + 1, ...result}
+        this.dataSource = [...this.dataSource,VALUE];
       }
     });
   }

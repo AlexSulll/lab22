@@ -1,41 +1,83 @@
 <header>
   <div class="example-button-row">
-    <button mat-raised-button color="accent" (click)="openDialog()">Добавить</button>
+    <button (click)="openDialog()"
+            color="accent"
+            mat-raised-button>
+      Добавить
+    </button>
   </div>
 </header>
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table [dataSource]="dataSource"
+       class="mat-elevation-z8"
+       mat-table>
   <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> ФИО </th>
-    <td mat-cell *matCellDef="let element"> {{ element.name }} </td>
+    <th *matHeaderCellDef
+        mat-header-cell>
+      ФИО
+    </th>
+    <td *matCellDef="let element"
+        mat-cell>
+      {{ element.name }}
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="numberOfComputer">
-    <th mat-header-cell *matHeaderCellDef> Номер компьютера </th>
-    <td mat-cell *matCellDef="let element"> {{ element.numberOfComputer }} </td>
+    <th *matHeaderCellDef
+        mat-header-cell>
+      Номер компьютера
+    </th>
+    <td *matCellDef="let element"
+        mat-cell>
+      {{ element.numberOfComputer }}
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="date">
-    <th mat-header-cell *matHeaderCellDef> Дата бронирования </th>
-    <td mat-cell *matCellDef="let element"> {{ element.date | dateTransform }} </td>
+    <th *matHeaderCellDef
+        mat-header-cell>
+      Дата бронирования
+    </th>
+    <td *matCellDef="let element"
+        mat-cell>
+      {{ element.date | dateTransform }}
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="phone">
-    <th mat-header-cell *matHeaderCellDef> Номер телефона </th>
-    <td mat-cell *matCellDef="let element"> {{ element.phone | phoneTransform }} </td>
+    <th *matHeaderCellDef
+        mat-header-cell>
+      Номер телефона
+    </th>
+    <td *matCellDef="let element"
+        mat-cell>
+      {{ element.phone | phoneTransform }}
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="game">
-    <th mat-header-cell *matHeaderCellDef> Игра </th>
-    <td mat-cell *matCellDef="let element"> {{ element.game }} </td>
+    <th *matHeaderCellDef
+        mat-header-cell>
+      Игра
+    </th>
+    <td *matCellDef="let element"
+        mat-cell>
+      {{ element.game }}
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="button">
-    <th mat-header-cell *matHeaderCellDef> Удалить запись </th>
-    <td mat-cell *matCellDef="let element">
-      <div class="example-button-row"  (click)="removeRow(element.id)">
+    <th *matHeaderCellDef
+        mat-header-cell>
+      Удалить запись
+    </th>
+    <td *matCellDef="let element"
+        mat-cell>
+      <div (click)="removeRow(element.id)"
+           class="example-button-row">
         <div class="example-flex-container">
           <div class="example-button-container">
-            <button mat-fab color="primary">
+            <button color="primary"
+                    mat-fab>
               <img src="./assets/images/trash.svg" alt = "button of delete"  class = 'del-buttom'>
             </button>
           </div>
@@ -43,6 +85,10 @@
       </div>
     </td>
   </ng-container>
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  <tr *matHeaderRowDef="displayedColumns"
+      mat-header-row>
+  </tr>
+  <tr *matRowDef="let row; columns: displayedColumns"
+      mat-row>
+  </tr>
 </table>

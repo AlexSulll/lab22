@@ -8,8 +8,16 @@ import { DatePipe } from "@angular/common";
 })
 
 export class DateFormatPipe implements PipeTransform {
-    constructor(private dateTransform: DatePipe) {
-    }
+    constructor (
+      private dateTransform: DatePipe
+    ) {}
+  /**
+   * Делаем из full даты дату по маске
+   * @param value
+   * @param format
+   * @param timezone
+   * @param locale
+   */
     transform(value: Date | string | number, format?: string, timezone?: string, locale?: string): string | null;
     transform(value: null | undefined, format?: string, timezone?: string, locale?: string): null;
     transform(value: Date | string | number | null | undefined, format?: string, timezone?: string, locale?: string): string | null {
