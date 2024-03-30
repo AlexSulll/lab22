@@ -8,7 +8,6 @@ import { DatePipe } from "@angular/common";
 })
 
 export class DateFormatPipe implements PipeTransform {
-
     constructor(private dateTransform: DatePipe) {
     }
     transform(value: Date | string | number, format?: string, timezone?: string, locale?: string): string | null;
@@ -16,5 +15,4 @@ export class DateFormatPipe implements PipeTransform {
     transform(value: Date | string | number | null | undefined, format?: string, timezone?: string, locale?: string): string | null {
         return this.dateTransform.transform(value, format || 'dd.MM.yyyy', timezone, locale);
     }
-
 }

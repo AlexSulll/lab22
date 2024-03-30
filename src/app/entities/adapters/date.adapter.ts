@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { NativeDateAdapter } from "@angular/material/core";
 
-
 @Injectable()
 
 export class AppDateAdapter extends NativeDateAdapter {
@@ -16,7 +15,6 @@ export class AppDateAdapter extends NativeDateAdapter {
     const timestamp = typeof value === 'number' ? value : Date.parse(value);
     return isNaN(timestamp) ? null : new Date(timestamp);
   }
-
   override format(date: Date, displayFormat: string): string {
     if (displayFormat === 'input') {
       const day = date.getDate();
@@ -31,7 +29,6 @@ export class AppDateAdapter extends NativeDateAdapter {
       return date.toDateString();
     }
   }
-
   private _to2digit(n: number): string {
     return ('00' + n).slice(-2);
   }

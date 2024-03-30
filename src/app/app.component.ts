@@ -49,6 +49,7 @@ const COLUMNS_SCHEMA = [
     label: "Удалить запись"
   }
 ]
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -57,6 +58,7 @@ const COLUMNS_SCHEMA = [
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   public displayedColumns: string[] = COLUMNS_SCHEMA.map((col) => col.key);
   public dataSource: any = USER_DATA;

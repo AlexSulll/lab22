@@ -1,4 +1,5 @@
-export interface IDialogData {
+export interface IDialogData
+{
   id?: number;
   name: string | null;
   numberOfComputer: string | null;
