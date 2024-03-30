@@ -7,11 +7,14 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatSelectModule } from "@angular/material/select";
 import { MatButtonModule } from "@angular/material/button";
-import { ErrorStateMatcher, MAT_DATE_FORMATS, MatNativeDateModule } from "@angular/material/core";
+import {DateAdapter, ErrorStateMatcher, MAT_DATE_FORMATS, MatNativeDateModule} from "@angular/material/core";
 import { FormBuilderService } from "../../services/form-builder.service";
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from "@angular/material/dialog";
 import { NgxMaskDirective, provideNgxMask, NgxMaskPipe } from "ngx-mask";
 import { IDialogData } from "../../interfaces/dialog-data.interface";
+import { DatePipe } from "@angular/common";
+import { DateFormatPipe } from "../../pipes/date-format.pipe";
+import {APP_DATE_FORMATS, AppDateAdapter} from "../../adapters/date.adapter";
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -22,8 +25,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: 'app-dialog-window',
   standalone: true,
-  imports: [CommonModule, MatInputModule, MatCardModule, MatCheckboxModule, MatDatepickerModule, MatSelectModule, MatButtonModule, MatNativeDateModule, ReactiveFormsModule, MatDialogModule, NgxMaskDirective, NgxMaskPipe],
-  providers: [provideNgxMask()],
+  imports: [CommonModule, MatInputModule, MatCardModule, MatCheckboxModule, MatDatepickerModule, MatSelectModule, MatButtonModule, MatNativeDateModule, ReactiveFormsModule, MatDialogModule, NgxMaskDirective, NgxMaskPipe, DatePipe, DateFormatPipe],
+  providers: [provideNgxMask(), {provide: DateAdapter, useClass: AppDateAdapter}, {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}],
   templateUrl: './dialog-window.component.html',
   styleUrls: ['./dialog-window.component.css']
 })

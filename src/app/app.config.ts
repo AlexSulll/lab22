@@ -3,5 +3,5 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from "@angular/material/datepicker";
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideAnimations(), MatDatepickerModule, provideAnimations()]
+  providers: [provideAnimations(), MatDatepickerModule]
 };

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { MatDialog } from "@angular/material/dialog";
 import { MatButtonModule } from "@angular/material/button";
 import { MatTableModule } from "@angular/material/table";
@@ -8,12 +8,13 @@ import { DialogWindowComponent } from "./entities/components/dialog-window/dialo
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { IDialogData } from "./entities/interfaces/dialog-data.interface";
-
+import { DateFormatPipe } from "./entities/pipes/date-format.pipe";
+import { PhoneFormatPipe } from "./entities/pipes/phone-format.pipe";
 
 const USER_DATA: IDialogData[] = [
-  {id: 1, name: 'Сулимов Александр Дмитриевич', numberOfComputer: '1', date: '14.03.2024', game: 'CS2', phone: '+7(912)845-76-55'},
-  {id: 2, name: 'Сабиров Данияр Серикович', numberOfComputer: '3', date: '16.03.2024', game: 'DOTA 2', phone: '+7(906)573-18-00'},
-  {id: 3, name: 'Сизов Игорь Михайлович', numberOfComputer: '2', date: '20.02.2024', game: 'PUBG', phone: '+7(977)777-77-777'},
+  {id: 1, name: 'Сулимов Александр Дмитриевич', numberOfComputer: '1', date: '03/14/2024', game: 'CS2', phone: '9128457655'},
+  {id: 2, name: 'Сабиров Данияр Серикович', numberOfComputer: '3', date: '03/16/2024', game: 'DOTA 2', phone: '9065731800'},
+  {id: 3, name: 'Сизов Игорь Михайлович', numberOfComputer: '2', date: '02/20/2024', game: 'PUBG', phone: '9777777777'},
 ];
 
 const COLUMNS_SCHEMA = [
@@ -51,7 +52,8 @@ const COLUMNS_SCHEMA = [
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatTableModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule],
+  imports: [CommonModule, MatButtonModule, MatTableModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule, DateFormatPipe, PhoneFormatPipe],
+  providers: [DatePipe],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

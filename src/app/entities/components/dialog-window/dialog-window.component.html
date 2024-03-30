@@ -87,7 +87,5 @@
 </mat-dialog-content>
 <mat-dialog-actions class="button">
   <button mat-button mat-dialog-close class="button-exit" (click)="close()">Отменить</button>
-  <button mat-button mat-raised-button color="accent" (click)="add()" class="button-add">
-<!--          [disabled]="pcClubForm.invalid"-->
-  Сохранить</button>
+  <button mat-button mat-raised-button color="accent" (click)="add()" class="button-add" [disabled]="pcClubForm.invalid">Сохранить</button>
 </mat-dialog-actions>
